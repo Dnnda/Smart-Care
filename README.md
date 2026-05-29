@@ -111,27 +111,27 @@ Pemodelan ini menggunakan metode Mamdani dengan dua variabel input (`Saturasi_Ok
 **2. Fungsi Keanggotaan (Membership Function)**
 Pemetaan nilai numerik dari pembacaan sensor ke dalam variabel linguistik (Himpunan Fuzzy).
 * **Input 1 - Saturasi Oksigen:** Dibagi menjadi 4 himpunan (*Hipoksemia_Parah, Hipoksemia, Abnormal, Normal*).
-![MF Saturasi Oksigen]<img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/5861c41e-600e-4f1a-9c38-cfd8da526c89" />
+<img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/5861c41e-600e-4f1a-9c38-cfd8da526c89" />
 
 
 * **Input 2 - Denyut Jantung:** Dibagi menjadi 4 himpunan (*Rendah, Normal, Tinggi, Sangat_Tinggi*).
-![MF Denyut Jantung]<img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/6aa250b7-c70f-4aee-92ef-30b8a9246009" />
+<img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/6aa250b7-c70f-4aee-92ef-30b8a9246009" />
 
 
 * **Output - Kadar Kolesterol:** Dibagi menjadi 3 himpunan (*Baik, Waspada, Bahaya*).
-![MF Kadar Kolesterol]<img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/558b0296-2ac7-4886-814e-e29576db18c7" />
+<img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/558b0296-2ac7-4886-814e-e29576db18c7" />
 
 
 **3. Basis Aturan (Rule Base)**
 Pembentukan 16 aturan (IF-THEN rules) berdasarkan kombinasi nilai dari kedua input untuk menentukan tingkat bahaya kolesterol.
 
-![Rule Editor MATLAB]<img width="702" height="596" alt="image" src="https://github.com/user-attachments/assets/b286f915-86ad-4dc1-abab-a48cb6fc5f60" />
+<img width="702" height="596" alt="image" src="https://github.com/user-attachments/assets/b286f915-86ad-4dc1-abab-a48cb6fc5f60" />
 
 
 **4. Evaluasi dan Defuzzifikasi (Rule Viewer)**
 Simulasi proses inferensi dan defuzzifikasi (menggunakan metode Centroid). Pada contoh di bawah, dengan input `Saturasi_Oksigen` = 96.7 dan `Denyut_Jantung` = 104, sistem memprediksi `Kadar_Kolesterol` berada di angka 219 (Masuk ke dalam zonasi Waspada/Bahaya).
 
-![Rule Viewer MATLAB]<img width="701" height="597" alt="image" src="https://github.com/user-attachments/assets/75faff1d-2317-428a-b564-efadb1b20976" />
+<img width="701" height="597" alt="image" src="https://github.com/user-attachments/assets/75faff1d-2317-428a-b564-efadb1b20976" />
 
 ## 🔧 Hardware & Komponen
 
