@@ -10,7 +10,8 @@
 
 <br/>
 
-![Uploading design.png…]()
+<img width="2586" height="1425" alt="design" src="https://github.com/user-attachments/assets/e6b18d47-cbc2-45a4-9689-d40758c7b134" />
+
 
 ![Device](https://img.shields.io/badge/Device-SmartCare_v1.0-blueviolet?style=flat-square&logo=arduino)
 ![Sensor](https://img.shields.io/badge/Sensor-MAX30102-red?style=flat-square)
