@@ -1,9 +1,5 @@
 <div align="center">
 
-<img src="https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge" />
-<img src="https://img.shields.io/badge/status-active-success?style=for-the-badge" />
-<img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" />
-<img src="https://img.shields.io/badge/platform-ESP32-orange?style=for-the-badge" />
 
 # 🫀 SmartCare
 
@@ -16,8 +12,8 @@
 
 ![SmartCare Device](https://img.shields.io/badge/Device-SmartCare_v1.0-blueviolet?style=flat-square&logo=arduino)
 ![Sensor](https://img.shields.io/badge/Sensor-MAX30105-red?style=flat-square)
-![MCU](https://img.shields.io/badge/MCU-ESP32-blue?style=flat-square)
-![IoT](https://img.shields.io/badge/IoT-Blynk-green?style=flat-square)
+![MCU](https://img.shields.io/badge/MCU-ARDUINO_UNO-blue?style=flat-square)
+![IoT](https://img.shields.io/badge/IoT-Blynk-green?style=flat-square)``
 
 </div>
 
@@ -43,7 +39,7 @@ Sistem ini memanfaatkan sinyal **Heart Rate** dan **SpO₂** yang dibaca oleh se
 | 🔴 **Sensor MAX30105** | Deteksi Heart Rate & SpO₂ via PPG |
 | 🧠 **Fuzzy Logic Mamdani** | Klasifikasi cerdas kadar kolesterol |
 | 📺 **Display OLED** | Tampilan real-time langsung di perangkat |
-| 📱 **Blynk IoT** | Monitoring jarak jauh via smartphone |
+| 📱 **Blynk IoT** | Monitoring jarak jauh via smartphone | ???
 | ⚡ **ESP32** | Pemrosesan cepat dengan WiFi terintegrasi |
 | 📊 **Akurasi 93.85%** | Diuji terhadap alat standar medis |
 
@@ -68,8 +64,8 @@ Sistem ini memanfaatkan sinyal **Heart Rate** dan **SpO₂** yang dibaca oleh se
 
 ```
 ┌──────────────┐     I²C      ┌──────────────┐     WiFi     ┌──────────────┐
-│  MAX30105    │ ──────────▶  │   ESP32      │ ──────────▶  │   Blynk IoT  │
-│  (Sensor)    │              │  (Processing) │              │  (Dashboard) │
+│  MAX30105    │ ──────────▶  |  Arduino uno │ ──────────▶  │             │
+│  (Sensor)    │              │  (Processing) │              │             │
 └──────────────┘              └──────┬───────┘              └──────────────┘
                                      │
                                      │ SPI
@@ -101,22 +97,20 @@ Sistem ini memanfaatkan sinyal **Heart Rate** dan **SpO₂** yang dibaca oleh se
 
 | Komponen | Spesifikasi | Fungsi |
 |---|---|---|
-| **ESP32** | Xtensa Dual-Core LX6, 160 MHz | Mikrokontroler utama |
+| **Aruduino-Uno** || Mikrokontroler utama |
 | **MAX30105** | PPG Sensor, 18-bit ADC | Deteksi Heart Rate & SpO₂ |
 | **OLED TFT** | 240×320, SSD2212 | Display lokal |
-| **Blynk Platform** | IoT Cloud | Remote monitoring |
 | **PCB** | Custom design | Perangkat keras terintegrasi |
-| **Akrilik** | Custom enclosure | Casing perangkat |
 
-### Wiring Pin (ESP32 ↔ MAX30105)
+### Wiring Pin (Arduino Uno ↔ MAX30105)
 
 ```
-ESP32          MAX30105
-─────          ────────
-3.3V    ──▶   VCC
-GND     ──▶   GND
-GPIO21  ──▶   SDA
-GPIO22  ──▶   SCL
+Arduinio Uno         MAX30105
+────────────         ────────
+3.3V           ──▶   VCC
+GND            ──▶   GND
+A5             ──▶   SDA
+A5             ──▶   SCL
 ```
 
 ---
@@ -125,35 +119,18 @@ GPIO22  ──▶   SCL
 
 ```
 SmartCare/
-│
-├── 📂 firmware/               # Kode ESP32 (Arduino IDE)
-│   ├── main.ino               # Program utama
-│   ├── fuzzy_logic.cpp        # Implementasi Fuzzy Mamdani
-│   ├── fuzzy_logic.h
-│   ├── sensor_max30105.cpp    # Driver sensor
-│   └── blynk_config.h        # Konfigurasi IoT
-│
-├── 📂 hardware/               # Desain rangkaian & PCB
-│   ├── schematic.pdf
-│   ├── pcb_layout.pdf
-│   └── bom.xlsx               # Bill of Materials
-│
-├── 📂 ui-ux/                  # Desain antarmuka
-│   ├── blynk_dashboard/       # Layout Blynk
-│   ├── oled_mockup/           # Desain layar OLED
-│   └── figma_assets/          # File desain
+
+├── 📂 assets/                 # Gambar & media
 │
 ├── 📂 mechanical/             # Desain fisik & casing
-│   ├── enclosure_3d/          # File 3D (.stl)
-│   └── assembly_guide.pdf
+│
+├── 📂 firmware/               # Kode Sistem
+│
+├── 📂 hardware/               # Desain rangkaian & PCB
+│
+├── 📂 ui-ux/                  # Desain antarmuka
 │
 ├── 📂 docs/                   # Dokumentasi
-│   ├── skripsi_reference.pdf
-│   ├── fuzzy_rules.md
-│   └── testing_results.xlsx
-│
-├── 📂 assets/                 # Gambar & media
-│   └── device_photo.png
 │
 └── README.md
 ```
@@ -221,7 +198,7 @@ cd smartcare
 
 ---
 
-## 👥 Tim Pengembang — Kelompok 6
+## 👥 Tim Pengembang — Kelompok 3
 
 <table>
   <tr>
@@ -248,19 +225,6 @@ cd smartcare
 
 ---
 
-## 🗺️ Roadmap
-
-- [x] Prototype v1.0 — Deteksi Heart Rate & SpO₂
-- [x] Implementasi Fuzzy Logic Mamdani (16 rules)
-- [x] Integrasi Blynk IoT Dashboard
-- [x] Kalibrasi sensor & pengujian akurasi
-- [ ] Penambahan input parameter: berat badan & usia
-- [ ] Dukungan baterai (portable mode)
-- [ ] Eksplorasi metode alternatif (ANFIS, Neural Network)
-- [ ] Sertifikasi perangkat medis
-
----
-
 ## 🧪 Referensi Ilmiah
 
 Proyek ini dikembangkan berdasarkan:
@@ -273,15 +237,12 @@ Proyek ini dikembangkan berdasarkan:
 ---
 
 ## 📄 Lisensi
-
-Proyek ini dilisensikan di bawah [MIT License](LICENSE).
-
 ---
 
 <div align="center">
 
 **SmartCare** — *Monitoring Kolesterol, Tanpa Rasa Sakit* 🫀
 
-Made with ❤️ by **Kelompok 6**
+Made with ❤️ by **Kelompok 3**
 
 </div>
