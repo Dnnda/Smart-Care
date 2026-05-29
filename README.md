@@ -203,7 +203,7 @@ python main_gui.py               # Sesuaikan dengan nama file Python kamu
 | Pengukuran | Nilai |
 | --- | --- |
 | Metode Komunikasi | Komunikasi Serial (USB) |
-| Baud Rate | 115200 bps (Sesuaikan dengan kode) |
+| Baud Rate | 9600 bps |
 
 > ⚠️ **Catatan:** Intensitas cahaya eksternal dapat memengaruhi akurasi pembacaan sensor MAX30102. Disarankan penggunaan di tempat dengan pencahayaan ruangan normal dan pastikan jari diletakkan dengan stabil.
 
