@@ -47,7 +47,8 @@ Sistem ini memanfaatkan sinyal **Heart Rate** dan **SpO₂** yang dibaca oleh se
 
 ## 🖥️ Tampilan Antarmuka
 
-![Foto Antarmuka OLED/GUI](masukkan_link_foto_antarmuka_di_sini_nanti)
+<img width="1126" height="663" alt="Tampilan GUI" src="https://github.com/user-attachments/assets/0bae8336-4374-4dcc-9a9c-1640e342e082" />
+
 
 ```text
 ┌─────────────────────────────────┐
