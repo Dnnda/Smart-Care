@@ -211,6 +211,19 @@ python main_gui.py               # Sesuaikan dengan nama file Python kamu
 
 ## 👥 Tim Pengembang — Kelompok 3
 
+**🔗 Link Repository Utama:** [Dnnda/Smart-Care](https://github.com/Dnnda/Smart-Care)
+
+![Foto Tim](masukkan_link_foto_tim_di_sini_nanti)
+
+| Nama Lengkap | NRP | Peran Utama | Profil GitHub |
+|---|---|---|---|
+| **Innova Ryan Likita** | 2124600018 | Software | [@innovaryanlikitacyber](https://github.com/innovaryanlikitacyber) |
+| **Muhammad Daffa Aditya Alfarizky** | 2124600014 | Hardware | [@dappadityaa](https://github.com/dappadityaa) |
+| **Dimas Nanda Pratama** | 2124600018 | Mechanic | [@Dnnda](https://github.com/Dnnda) |
+| **Sahrul Effendi** | 2124600024 | UI/UX | [@SahrulEffendi](https://github.com/SahrulEffendi) |
+| **Adi Chandra Winata** | 2124600028 | UI/UX | [@chandrawinataa-ui](https://github.com/chandrawinataa-ui) |
+| **Muhammad Alif Algifari** | 2124640002 | Hardware | [@ahmadalif200](https://github.com/ahmadalif200) |
+
 ---
 
 ## 🧪 Referensi Ilmiah
