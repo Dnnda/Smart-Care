@@ -10,7 +10,7 @@
 
 <br/>
 
-![Foto SmartCare Device](masukkan_link_foto_perangkat_di_sini_nanti)
+![Uploading design.png…]()
 
 ![Device](https://img.shields.io/badge/Device-SmartCare_v1.0-blueviolet?style=flat-square&logo=arduino)
 ![Sensor](https://img.shields.io/badge/Sensor-MAX30102-red?style=flat-square)
