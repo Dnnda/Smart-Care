@@ -143,7 +143,7 @@ SmartCare/
 ### Prasyarat
 
 - [Arduino IDE](https://www.arduino.cc/en/software) v2.x
-- ESP32 Board Package
+- Arduino Uno
 - Library yang dibutuhkan:
 
 ```
