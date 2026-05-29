@@ -229,13 +229,6 @@ Proyek ini dikembangkan berdasarkan:
 3. Rahmawati, T., et al. (2023). *Development of Non-Invasive Cholesterol Monitoring System Using TCRT5000 Sensor with Android Compatibility*. Jurnal Fisika, 13(2), 77–84.
 4. NCEP ATP III Guidelines — Kadar Kolesterol Normal: <200 mg/dL, Borderline: 200–239 mg/dL, Tinggi: ≥240 mg/dL.
 
----
-
-## 📄 Lisensi
-
-[Tambahkan Lisensi di sini, misal: MIT License]
-
----
 
 **SmartCare** — *Monitoring Kolesterol, Tanpa Rasa Sakit* 🫀
 
