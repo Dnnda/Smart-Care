@@ -63,17 +63,18 @@ Sistem ini memanfaatkan sinyal **Heart Rate** dan **SpO₂** yang dibaca oleh se
 ## 🏗️ Arsitektur Sistem
 
 ```
-┌──────────────┐     I²C      ┌──────────────┐     WiFi     ┌──────────────┐
-│  MAX30105    │ ──────────▶  |  Arduino uno │ ──────────▶  │             │
-│  (Sensor)    │              │  (Processing) │              │             │
-└──────────────┘              └──────┬───────┘              └──────────────┘
-                                     │
-                                     │ SPI
-                                     ▼
-                              ┌──────────────┐
-                              │  OLED Display│
-                              │  240 × 320   │
-                              └──────────────┘
+Input Sensor                                              Output
+  ┌──────────────┐           ┌──────────────────┐         ┌──────────────┐
+  │              │           │                  │         │              │
+  │    Sensor    │ ────────▶ │  Mikrokontroler  │ ──────▶ │ OLED Display │
+  │   Max30102   │           │   Arduino Uno    │         │              │
+  │              │           │                  │         └──────────────┘
+  └──────────────┘           └────────┬─────────┘
+                                      │                   ┌──────────────┐
+                                      │                   │              │
+                                      └─────────────────▶ │      GUI     │
+                                                          │              │
+                                                          └──────────────┘
 ```
 
 ### Alur Kerja Fuzzy Logic
