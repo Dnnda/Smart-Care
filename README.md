@@ -1,4 +1,3 @@
-
 <div align="center">
 
 # 🫀 SmartCare
@@ -10,12 +9,12 @@
 
 ![Device](https://img.shields.io/badge/Device-SmartCare_v1.0-blueviolet?style=flat-square&logo=arduino)
 ![Sensor](https://img.shields.io/badge/Sensor-MAX30102-red?style=flat-square)
+![Firmware](https://img.shields.io/badge/Firmware-Bare_Metal-black?style=flat-square)
 ![MCU](https://img.shields.io/badge/MCU-ARDUINO_UNO-blue?style=flat-square)
 ![GUI](https://img.shields.io/badge/Interface-Python_GUI-green?style=flat-square)
 <br/>
 
 <img width="2586" height="1425" alt="design" src="https://github.com/user-attachments/assets/e6b18d47-cbc2-45a4-9689-d40758c7b134" />
-
 
 </div>
 
@@ -25,7 +24,7 @@
 
 **SmartCare** adalah prototipe perangkat medis pintar yang memantau kadar kolesterol secara *non-invasive* — tanpa pengambilan sampel darah. Cukup letakkan jari pada sensor, dan dalam hitungan detik sistem akan mengklasifikasikan kadar kolesterol ke dalam kategori **Baik**, **Waspada**, atau **Bahaya**.
 
-Sistem ini memanfaatkan sinyal **Heart Rate** dan **SpO₂** yang dibaca oleh sensor **MAX30102**, kemudian diproses melalui algoritma **Fuzzy Logic Mamdani** di mikrokontroler **Arduino Uno**, dan hasilnya ditampilkan secara real-time pada layar **OLED 0.96 inch** serta antarmuka **GUI Python** di komputer.
+Sistem ini memanfaatkan sinyal **Heart Rate** dan **SpO₂** yang dibaca oleh sensor **MAX30102**, kemudian diproses melalui algoritma **Fuzzy Logic Mamdani** di mikrokontroler **Arduino Uno**. *Firmware* perangkat ini ditulis secara **Bare Metal** (tanpa *library* eksternal) untuk memaksimalkan efisiensi. Hasil pemrosesan ditampilkan secara real-time pada layar **OLED 0.96 inch** serta divisualisasikan melalui antarmuka **GUI Python** di komputer.
 
 > 📄 Proyek ini dikembangkan berdasarkan penelitian skripsi:  
 > *"Sistem Monitoring Kadar Kolesterol Secara Non-Invasive Menggunakan Sensor MAX30102 Dengan Metode Fuzzy Logic Mamdani"* > — Azra Ramadhan Pohan, Universitas Lampung, 2025
@@ -39,6 +38,7 @@ Sistem ini memanfaatkan sinyal **Heart Rate** dan **SpO₂** yang dibaca oleh se
 | 🩺 **Non-Invasive** | Tanpa jarum atau pengambilan darah |
 | 🔴 **Sensor MAX30102** | Deteksi Heart Rate & SpO₂ via PPG |
 | 🧠 **Fuzzy Logic Mamdani** | Klasifikasi cerdas kadar kolesterol |
+| 💻 **Bare Metal Programming** | *Firmware* ringan dan cepat tanpa dependensi *library* eksternal |
 | 📺 **Display OLED 0.96"** | Tampilan real-time langsung di perangkat keras |
 | 🖥️ **GUI Python** | Antarmuka pengguna interaktif di komputer via komunikasi Serial |
 | 📊 **Akurasi 93.85%** | Diuji terhadap alat standar medis |
@@ -71,7 +71,7 @@ Input Sensor                                                Output
   │              │           │                  │ ──────▶ │ OLED 0.96 inch   │
   │    Sensor    │ ────────▶ │  Mikrokontroler  │         └──────────────────┘
   │   MAX30102   │           │   Arduino Uno    │
-  │              │           │                  │         ┌──────────────────┐
+  │              │           │   (Bare Metal)   │         ┌──────────────────┐
   └──────────────┘           └────────┬─────────┘ ──────▶ │    GUI Python    │
                                       │                   │ (Komunikasi USB) │
                                       │                   └──────────────────┘
@@ -133,7 +133,7 @@ SmartCare/
 │
 ├── 📂 mechanical/             # Desain fisik & casing
 │
-├── 📂 firmware/               # Kode Sistem (Arduino IDE)
+├── 📂 firmware/               # Kode Sistem Bare Metal (C/C++)
 │
 ├── 📂 software/               # Source code GUI Python
 │
@@ -151,15 +151,10 @@ SmartCare/
 
 ### Prasyarat
 
-**Untuk Hardware (Arduino):**
+**Untuk Hardware (Arduino Uno):**
 
-* [Arduino IDE](https://www.arduino.cc/en/software) v2.x
-* Library Arduino:
-* `SparkFun MAX3010x Pulse and Proximity Sensor Library`
-* `Adafruit GFX Library`
-* `Adafruit SSD1306` (Untuk OLED 0.96")
-
-
+* [Arduino IDE](https://www.arduino.cc/en/software) v2.x (Atau *toolchain* AVR GCC/Atmel Studio)
+* **Tanpa Library Tambahan:** Program ini ditulis secara *bare metal*, sehingga tidak memerlukan instalasi *library* eksternal untuk sensor maupun OLED. Konfigurasi I2C (TWI) dilakukan langsung ke level register.
 
 **Untuk Software (GUI Python):**
 
@@ -170,11 +165,11 @@ SmartCare/
 
 ```bash
 # 1. Clone repositori ini
-git clone [https://github.com/your-org/smartcare.git](https://github.com/your-org/smartcare.git)
-cd smartcare
+git clone [https://github.com/Dnnda/Smart-Care.git](https://github.com/Dnnda/Smart-Care.git)
+cd Smart-Care
 
 # 2. Upload Firmware ke Arduino
-# Buka file firmware/main.ino di Arduino IDE
+# Buka file utama di folder firmware menggunakan Arduino IDE
 # Pilih Board: Tools → Board → Arduino Uno
 # Pilih Port yang sesuai, lalu klik Upload ▶
 
@@ -202,8 +197,8 @@ python main_gui.py               # Sesuaikan dengan nama file Python kamu
 
 | Pengukuran | Nilai |
 | --- | --- |
-| Metode Komunikasi | Komunikasi Serial (USB) |
-| Baud Rate | 9600 bps |
+| Metode Komunikasi | Komunikasi Serial (USB) / UART |
+| Baud Rate | 9600 bps (Sesuaikan dengan register USART) |
 
 > ⚠️ **Catatan:** Intensitas cahaya eksternal dapat memengaruhi akurasi pembacaan sensor MAX30102. Disarankan penggunaan di tempat dengan pencahayaan ruangan normal dan pastikan jari diletakkan dengan stabil.
 
@@ -213,10 +208,8 @@ python main_gui.py               # Sesuaikan dengan nama file Python kamu
 
 **🔗 Link Repository Utama:** [Dnnda/Smart-Care](https://github.com/Dnnda/Smart-Care)
 
-![Foto Tim](masukkan_link_foto_tim_di_sini_nanti)
-
 | Nama Lengkap | NRP | Peran Utama | Profil GitHub |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Innova Ryan Likita** | 2124600018 | Software | [@innovaryanlikitacyber](https://github.com/innovaryanlikitacyber) |
 | **Muhammad Daffa Aditya Alfarizky** | 2124600014 | Hardware | [@dappadityaa](https://github.com/dappadityaa) |
 | **Dimas Nanda Pratama** | 2124600018 | Mechanic | [@Dnnda](https://github.com/Dnnda) |
