@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "author": "Innova Ryan Likita",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-breadboard-half", "id": "bb1", "top": -60.6, "left": 290.8, "attrs": {} },
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": -57, "left": -0.6, "attrs": {} },
+    { "type": "wokwi-potentiometer", "id": "pot1", "top": -78.1, "left": 316.6, "attrs": {} },
+    { "type": "wokwi-potentiometer", "id": "pot2", "top": -78.1, "left": 403, "attrs": {} },
+    {
+      "type": "board-ssd1306",
+      "id": "oled1",
+      "top": 89.54,
+      "left": 336.23,
+      "attrs": { "i2cAddress": "0x3c" }
+    },
+    { "type": "wokwi-slide-switch", "id": "sw1", "top": -43.6, "left": 492.7, "attrs": {} }
+  ],
+  "connections": [
+    [ "bb1:4t.b", "bb1:13t.b", "black", [ "v0" ] ],
+    [ "bb1:7b.g", "bb1:4t.c", "black", [ "v0" ] ],
+    [ "bb1:21t.b", "bb1:4t.d", "black", [ "v0" ] ],
+    [ "bb1:4t.e", "uno:GND.3", "black", [ "h-167.2" ] ],
+    [ "oled1:VCC", "bb1:15b.g", "red", [ "v0" ] ],
+    [ "bb1:6t.b", "bb1:15b.f", "red", [ "v0" ] ],
+    [ "bb1:15t.b", "bb1:15b.h", "red", [ "h9.6", "v76.8" ] ],
+    [ "bb1:15b.i", "uno:5V", "red", [ "v-38.4", "h-19.2" ] ],
+    [ "bb1:5t.b", "uno:A0", "orange", [ "v67.2", "h-134.4" ] ],
+    [ "bb1:14t.b", "uno:A1", "purple", [ "v76.8", "h-220.8" ] ],
+    [ "bb1:20t.b", "uno:2", "violet", [ "v57.6", "h-259.2" ] ],
+    [ "oled1:SDA", "uno:A4", "yellow", [ "v-9.6", "h-134.33" ] ],
+    [ "oled1:SCL", "uno:A5", "blue", [ "v-57.6", "h-114.9" ] ],
+    [ "pot1:GND", "bb1:4t.a", "", [ "$bb" ] ],
+    [ "pot1:SIG", "bb1:5t.a", "", [ "$bb" ] ],
+    [ "pot1:VCC", "bb1:6t.a", "", [ "$bb" ] ],
+    [ "pot2:GND", "bb1:13t.a", "", [ "$bb" ] ],
+    [ "pot2:SIG", "bb1:14t.a", "", [ "$bb" ] ],
+    [ "pot2:VCC", "bb1:15t.a", "", [ "$bb" ] ],
+    [ "sw1:1", "bb1:20t.a", "", [ "$bb" ] ],
+    [ "sw1:2", "bb1:21t.a", "", [ "$bb" ] ],
+    [ "sw1:3", "bb1:22t.a", "", [ "$bb" ] ],
+    [ "oled1:GND", "bb1:7b.j", "", [ "$bb" ] ],
+    [ "oled1:VCC", "bb1:8b.j", "", [ "$bb" ] ],
+    [ "oled1:SCL", "bb1:9b.j", "", [ "$bb" ] ],
+    [ "oled1:SDA", "bb1:10b.j", "", [ "$bb" ] ]
+  ],
+  "dependencies": {}
+}
