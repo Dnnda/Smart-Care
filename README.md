@@ -27,7 +27,7 @@
 Sistem ini memanfaatkan sinyal **Heart Rate** dan **SpO₂** yang dibaca oleh sensor **MAX30102**, kemudian diproses melalui algoritma **Fuzzy Logic Mamdani** di mikrokontroler **Arduino Uno**. *Firmware* perangkat ini ditulis secara **Bare Metal** (tanpa *library* eksternal) untuk memaksimalkan efisiensi. Hasil pemrosesan ditampilkan secara real-time pada layar **OLED 0.96 inch** serta divisualisasikan melalui antarmuka **GUI Python** di komputer.
 
 > 📄 Proyek ini dikembangkan berdasarkan penelitian skripsi:  
-> *"Sistem Monitoring Kadar Kolesterol Secara Non-Invasive Menggunakan Sensor MAX30102 Dengan Metode Fuzzy Logic Mamdani"* > — Azra Ramadhan Pohan, Universitas Lampung, 2025
+> *"Sistem Monitoring Kadar Kolesterol Secara Non-Invasive Menggunakan Sensor MAX30102 Dengan Metode Fuzzy Logic Mamdani"* — Azra Ramadhan Pohan, Universitas Lampung, 2025
 
 ---
 
@@ -49,10 +49,9 @@ Sistem ini memanfaatkan sinyal **Heart Rate** dan **SpO₂** yang dibaca oleh se
 
 <img width="1126" height="663" alt="Tampilan GUI" src="https://github.com/user-attachments/assets/0bae8336-4374-4dcc-9a9c-1640e342e082" />
 
-
 ```text
 ┌─────────────────────────────────┐
-│  ❤️  HEART RATE: 72 bpm         │  ← Tampilan OLED 0.96" & GUI Python
+│  ❤️  HEART RATE: 72 bpm          │  ← Tampilan OLED 0.96" & GUI Python
 │  🫧  OXYGEN LEVEL: 98% SpO2     │
 │                                 │
 │  📊  Zonasi Kesehatan: NORMAL   │
@@ -67,15 +66,15 @@ Sistem ini memanfaatkan sinyal **Heart Rate** dan **SpO₂** yang dibaca oleh se
 ## 🏗️ Arsitektur Sistem
 
 ```text
-Input Sensor                                                Output
-  ┌──────────────┐           ┌──────────────────┐         ┌──────────────────┐
-  │              │           │                  │ ──────▶ │ OLED 0.96 inch   │
-  │    Sensor    │ ────────▶ │  Mikrokontroler  │         └──────────────────┘
-  │   MAX30102   │           │   Arduino Uno    │
-  │              │           │   (Bare Metal)   │         ┌──────────────────┐
-  └──────────────┘           └────────┬─────────┘ ──────▶ │    GUI Python    │
-                                      │                   │ (Komunikasi USB) │
-                                      │                   └──────────────────┘
+Input Sensor                                                                Output
+  ┌──────────────┐             ┌──────────────────┐         ┌──────────────────┐
+  │              │             │                  │ ──────▶ │ OLED 0.96 inch   │
+  │    Sensor    │ ────────▶   │  Mikrokontroler  │         └──────────────────┘
+  │   MAX30102   │             │   Arduino Uno    │
+  │              │             │   (Bare Metal)   │         ┌──────────────────┐
+  └──────────────┘             └────────┬─────────┘ ──────▶ │    GUI Python    │
+                                        │                   │ (Komunikasi USB) │
+                                        │                   └──────────────────┘
 
 ```
 
@@ -84,7 +83,7 @@ Input Sensor                                                Output
 ```text
 [Heart Rate] ──┐
                ├──▶ [ Fuzzifikasi ] ──▶ [ Rule Base (16 Rules) ] ──▶ [ Defuzzifikasi ] ──▶ Kadar Kolesterol
-[SpO₂]      ──┘
+[SpO₂]       ──┘
 
 ```
 
@@ -98,40 +97,31 @@ Input Sensor                                                Output
 * `Kadar Kolesterol` → **Baik** (< 200 mg/dL) | **Waspada** (200–239) | **Bahaya** (≥ 240)
 
 ---
+
 ### 🧠 Pemodelan Fuzzy Logic Mamdani (MATLAB)
 
-Sebelum diimplementasikan ke dalam mikrokontroler menggunakan bahasa C/C++ secara *bare metal*, sistem pakar Fuzzy Logic dimodelkan dan disimulasikan terlebih dahulu menggunakan **MATLAB Fuzzy Logic Toolbox**. 
+Sebelum diimplementasikan ke dalam mikrokontroler menggunakan bahasa C/C++ secara *bare metal*, sistem pakar Fuzzy Logic dimodelkan dan disimulasikan terlebih dahulu menggunakan **MATLAB Fuzzy Logic Toolbox**.
 
 **1. Desain Sistem Inferensi Fuzzy (FIS)**
 Pemodelan ini menggunakan metode Mamdani dengan dua variabel input (`Saturasi_Oksigen` dan `Denyut_Jantung`) yang akan menghasilkan satu variabel output (`Kadar_Kolesterol`).
 
-![FIS Editor MATLAB]<img width="702" height="596" alt="image" src="https://github.com/user-attachments/assets/5c82826f-bb02-46de-afcd-fe3202c08907" />
-
-
 **2. Fungsi Keanggotaan (Membership Function)**
 Pemetaan nilai numerik dari pembacaan sensor ke dalam variabel linguistik (Himpunan Fuzzy).
-* **Input 1 - Saturasi Oksigen:** Dibagi menjadi 4 himpunan (*Hipoksemia_Parah, Hipoksemia, Abnormal, Normal*).
-<img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/5861c41e-600e-4f1a-9c38-cfd8da526c89" />
 
+* **Input 1 - Saturasi Oksigen:** Dibagi menjadi 4 himpunan (*Hipoksemia_Parah, Hipoksemia, Abnormal, Normal*).
 
 * **Input 2 - Denyut Jantung:** Dibagi menjadi 4 himpunan (*Rendah, Normal, Tinggi, Sangat_Tinggi*).
-<img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/6aa250b7-c70f-4aee-92ef-30b8a9246009" />
-
 
 * **Output - Kadar Kolesterol:** Dibagi menjadi 3 himpunan (*Baik, Waspada, Bahaya*).
-<img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/558b0296-2ac7-4886-814e-e29576db18c7" />
 
 
 **3. Basis Aturan (Rule Base)**
 Pembentukan 16 aturan (IF-THEN rules) berdasarkan kombinasi nilai dari kedua input untuk menentukan tingkat bahaya kolesterol.
 
-<img width="702" height="596" alt="image" src="https://github.com/user-attachments/assets/b286f915-86ad-4dc1-abab-a48cb6fc5f60" />
-
-
 **4. Evaluasi dan Defuzzifikasi (Rule Viewer)**
 Simulasi proses inferensi dan defuzzifikasi (menggunakan metode Centroid). Pada contoh di bawah, dengan input `Saturasi_Oksigen` = 96.7 dan `Denyut_Jantung` = 104, sistem memprediksi `Kadar_Kolesterol` berada di angka 219 (Masuk ke dalam zonasi Waspada/Bahaya).
 
-<img width="701" height="597" alt="image" src="https://github.com/user-attachments/assets/75faff1d-2317-428a-b564-efadb1b20976" />
+---
 
 ## 🔧 Hardware & Komponen
 
@@ -150,12 +140,19 @@ Simulasi proses inferensi dan defuzzifikasi (menggunakan metode Centroid). Pada 
 ```text
 Arduino Uno          MAX30102 / OLED 0.96"
 ────────────         ─────────────────────
-3.3V / 5V     ──▶    VCC
-GND           ──▶    GND
-A4            ──▶    SDA
-A5            ──▶    SCL
+3.3V / 5V      ──▶    VCC
+GND            ──▶    GND
+A4             ──▶    SDA
+A5             ──▶    SCL
 
 ```
+
+### 🌐 Simulasi Rangkaian (Wokwi)
+
+Kamu dapat melihat skema interaktif dan tata letak komponen melalui tautan berikut:
+👉 **[SmartCare Simulation on Wokwi](https://wokwi.com/projects/465537042289944577)**
+
+> ⚠️ **PENTING UNTUK DIKETAHUI:** > Karena firmware proyek ini dikembangkan secara *Bare Metal* menggunakan struktur project berbasis PlatformIO (`platformio.ini`), simulasi **tidak dapat dijalankan langsung melalui web browser Wokwi**. Untuk menjalankan simulasi ini, Anda harus menggunakan **Wokwi extension di VS Code** yang telah dikoneksikan dengan environment PlatformIO lokal Anda (program siap salin ada di: firmware-deteksi kolestrol wokwi).
 
 ---
 
@@ -163,19 +160,12 @@ A5            ──▶    SCL
 
 ```text
 SmartCare/
-
 ├── 📂 assets/                 # Gambar & media (Masukkan foto di sini)
-│
 ├── 📂 mechanical/             # Desain fisik & casing
-│
 ├── 📂 firmware/               # Kode Sistem Bare Metal (C/C++)
-│
 ├── 📂 software/               # Source code GUI Python
-│
 ├── 📂 hardware/               # Desain rangkaian & PCB
-│
 ├── 📂 docs/                   # Dokumentasi
-│
 └── README.md
 
 ```
@@ -188,7 +178,7 @@ SmartCare/
 
 **Untuk Hardware (Arduino Uno):**
 
-* [Arduino IDE](https://www.arduino.cc/en/software) v2.x (Atau *toolchain* AVR GCC/Atmel Studio)
+* [Arduino IDE](https://www.arduino.cc/en/software) v2.x (Atau *toolchain* AVR GCC/Atmel Studio/PlatformIO di VS Code)
 * **Tanpa Library Tambahan:** Program ini ditulis secara *bare metal*, sehingga tidak memerlukan instalasi *library* eksternal untuk sensor maupun OLED. Konfigurasi I2C (TWI) dilakukan langsung ke level register.
 
 **Untuk Software (GUI Python):**
@@ -204,14 +194,14 @@ git clone [https://github.com/Dnnda/Smart-Care.git](https://github.com/Dnnda/Sma
 cd Smart-Care
 
 # 2. Upload Firmware ke Arduino
-# Buka file utama di folder firmware menggunakan Arduino IDE
+# Buka file utama di folder firmware menggunakan Arduino IDE atau VS Code (PlatformIO)
 # Pilih Board: Tools → Board → Arduino Uno
 # Pilih Port yang sesuai, lalu klik Upload ▶
 
 # 3. Jalankan GUI Python
 cd software
 pip install -r requirements.txt  # Jika ada file requirements
-python main_gui.py               # Sesuaikan dengan nama file Python kamu
+python main_gui.py                # Sesuaikan dengan nama file Python kamu
 
 ```
 
@@ -263,7 +253,10 @@ Proyek ini dikembangkan berdasarkan:
 3. Rahmawati, T., et al. (2023). *Development of Non-Invasive Cholesterol Monitoring System Using TCRT5000 Sensor with Android Compatibility*. Jurnal Fisika, 13(2), 77–84.
 4. NCEP ATP III Guidelines — Kadar Kolesterol Normal: <200 mg/dL, Borderline: 200–239 mg/dL, Tinggi: ≥240 mg/dL.
 
-
 **SmartCare** — *Monitoring Kolesterol, Tanpa Rasa Sakit* 🫀
 
 Made with ❤️ by **Kelompok 3**
+
+```
+
+```
